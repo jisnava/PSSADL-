@@ -1,0 +1,19 @@
+This is PDB50SI dataset:(22,532 structures and 5,102,185 residues)-refer ppaper for more details.
+The labels are given in eight-class format, so that users can convert them to three-class when needed.
+
+Includes the entire dataset information - the Inputs and outputs in separate files.
+The entire dataset file is split into three parts- The users can merge those files to get the entire dataset file.
+
+The input file is also split into two parts- The users can merge those files to get the entire input file.
+
+One hot encoded output label is used in the output file. (Codes for one hot encoding(of labels and the dictionary used for inputs) may be found in the - toonehot.py folder)
+
+The numpy files are not uploaded here because of their large size. 
+However, it will be made accessible upon request to the corresponding author (jisna_p170107cs@nitc.ac.in) 
+OR
+Using a programming language, users can convert the input and output files to numpy format, suitable for training purposes. 
+
+We use the following convention for converting to numpy format:
+
+Input file has 23 dimensions, including 20 for one-hot amino acid encoding and 3 for 3D coordinates.
+One hot encoding of three class secondary structure states is present in the output file.
