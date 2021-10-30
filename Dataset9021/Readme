@@ -1,0 +1,17 @@
+This is PDB40SI dataset: (9021 structures and 1,965,868 residues)-refer paper for more details.
+
+Includes the entire dataset - the Inputs and outputs in separate files.
+The labels are given in eight-class format, so that users can convert them to three-class when needed.
+
+One hot encoded output label is used for training the models. (Codes for one hot encoding(of labels and the dictionary used for inputs) may be found in the - toonehot.py folder)
+
+The numpy files are not uploaded here because of their large size. 
+However, it will be made accessible upon request to the corresponding author (jisna_p170107cs@nitc.ac.in) 
+OR
+Using a programming language, users can convert the input and output files to numpy format, suitable for training purposes. 
+
+We use the following convention for converting to numpy format:
+Input file: Each protein has a length of 500. Each sample is of 500x23 size, 
+where first 20 dimensions are for one-hot encoding of amino acids and the last three dimensions represents the 3D coordinates.
+One hot encoding of three class secondary structure states is present in the output NumPy format.
+
