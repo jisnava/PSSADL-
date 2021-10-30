@@ -1,0 +1,98 @@
+Phase I
+
+PISCES_1.txt - Extracted ids from PISCES server
+
+PISCES_11_40ID_A_CHAIN_ID_only.txt - extracted only A chain ids from 1_Pisces_40ID.txt using the program 1_PISCES_modified.py
+ 
+Then download the files of those proteins using the program- 2_parallel_downloader.py. And the results are stored in 18_PDB folder.
+
+Extract only CA ATOM record from protein files using the program- 3_CA_extraction.py. Results are stored in 18_PDB_CA folder.
+
+Extract only first chain details from 18_PDB_CA using the program 4_CA_chainwise.py and the results in 18_PDb_CA_A(But this has not only A chain but other chain details also).
+
+Extract AA name and coordinates only using the program 5_AA_coord_extraction.py and the results in 18_PDB_CA_COORD(9299 protein files). Here users can extract other chain details also, by a small modification to the given code.
+
+________________________________________________________________________________________________________________________________________________
+Phase II
+
+
+ss.txt - has secondary structure(DSSp) as well as primary sequence details, and is downloaded from RCSB-PDB.
+
+Extract only A chain details from ss.txt using the program 6_1_secstr_A_chain_only.py and the result in 6_A_CHAIN_SECSTR.txt.
+
+Extract those(1_Pisces_40ID_A_CHAIN_ID_only.txt) protein details from 6_A_CHAIN_SECSTR.txt and put the result in 7_a_secondary_extraction.txt.
+
+Remove line splits from 7_a_secondary_extraction.txt. using 8_remove_line_splits.py and results are saved in 8_line_splits_removed_from_7.txt.
+
+Remove new lines from 8_line_splits_removed_from_7.txt using 8_remove_new_line.py and results in 9_new_line_removed_from_8.txt.
+
+Replace spaces in secondary sequence using 11_secstr_replace_with_C.py and the results in 10_replace_gap_with_C.txt.
+
+Again new line comes, remove it using any code and the results in 11_new_line_removed_from_10.txt.
+
+Then one more time, copy the primary and secondary sequences from 11_new_line_removed_from_10.txt by comparing with ids in 1_Pisces_40ID_A_CHAIN_ID_only.txt and the result is stored in 12_Our_and_their_A_chain_only_new_line_removed.txt
+
+_______________________________________________________________________________________________________________________________________________________
+
+Secondary structure of some of the proteins in 1_Pisces_40ID_A_CHAIN_ID_only.txt may be missing from ss.txt.
+
+To find and remove it from folder 18_PDB_CA_COORD, extract the protein ids in 12_Our_and_their_A_chain_only_new_line_removed.txt using 7_extract_protein_ids_from_secondary_structure_file.py 
+and the results are stored in 13_extracted_ID_check_list, and the difference between 13_extracted_ID_check_list and 1_Pisces_40ID_A_CHAIN_ID_only.txt is calculated using 9_difference_calculator.py with the result in 14_difference_A_chain_IDs.txt(Note that V is not a python code ).
+
+Now this difference protein ids are deleted from the folder 18_PDB_CA_COORD using the program using 15_to_remove_difference_files_from_folder.py,(The folder now contain 9113 files).
+
+_______________________________________________________________________
+#Additional information
+One problem comes after alignment is that, still I found some protein files in 18_PDB_CA_COORD folder with chain extensions other than A chain. 
+These creates problems while doing alignment. 
+So I selected only those files having .pdb_A extensions and deleted others.
+
+Now the folder has 9021 protein files.
+
+__________________________________________________________________________
+Phase III
+
+Now we have primary and tertiary of the protein files we have downloaded from RCSB-PDB and primary and secondary sequencences obtained from ss.txt. 
+What we need is the secondary from ss.txt corresponding to tertiary from 18_PDB_CA_COORD. 
+We can't copy this directly. There are mismatches and length variations.So we have to do the alignment of two primary sequences - one we have and the other from ss.txt.
+This alignment is done using 13_aligning_two_primary.py and the result in 18_16_aligned_results.txt
+Aligned results are arranged using 14_aligned_results.py
+
+Next we compared the ids in the result and the previous file using 7_a_extract_protein_ids_from_17.py and both are same. Hence it's ok.
+
+___________________________________________________________________________
+#Additional information
+While doing alignment one problem occur. In some protein files a single aminoacid has two CA atompositions(reason) in ATOM records. Hence if this is not eliminated, 
+the name appears twice in our primary sequence and this creates problemsin alignment. 
+We avoided it in chainwise extraction program( 4_CA_chainwise.py)
+
+__________________________________________________________________________
+Phase III(Contd...)
+
+Now arrange the aligned results, using so that our primary, aligned result and secondary sequence are kept in one file 18_17_aligned_with_three_sequence.txt. 
+This is one input for final file along with the 18_PDB_CA_COORD folder. 
+
+Now run the final program in server 15_final_dataset_file_to_server_new.py and results are obtained in three files(Full dataset and the input, output files separately)  - 18_new_file.txt, 18_new_file_in.txt and 18_new_file_out.txt
+
+__________________________________________________________________________________________________________________________________________________________
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
