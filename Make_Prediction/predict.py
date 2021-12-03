@@ -99,7 +99,7 @@ def testing_protein(numpyfile, act_len): #Make predictions
     #Loading test set (189 proteins) from the mounted Google drive OR you can load this from your current working directory
     #x_test=np.load('/content/drive/MyDrive/CNN_for_STR_ASSIGNMENT_DATA_and_CODES/bench_193x500x23_xyzjune21.npy')
     #y_test=np.load('/content/drive/MyDrive/CNN_for_STR_ASSIGNMENT_DATA_and_CODES/bench_labels_193x500x3_xyzjune21.npy')
-    print("x_test: " + str(x_test.shape))
+    #print("x_test: " + str(x_test.shape))
     #x_test and y_test represents benchmarked set throughout the code(coordinates and labels respectively)
     #----------------------------------------------------------------------------------------
     #Reshape the test set-to match the expected dimensions for first CNN layer
@@ -113,10 +113,10 @@ def testing_protein(numpyfile, act_len): #Make predictions
     #resultbenchmarkCNNBLSTM = new_model.evaluate(x_test, y_test) # Accuracy on benchmark set(Test set I)- Evaluation for entire test set(not for individual samples)
     #----------------------------------------------------------------------------------------
     #Evaluation on a single protein
-    print(x_test[0].shape)
+    #print(x_test[0].shape)
     ti = 2 #third protein in test set
     test_protein=x_test[0].reshape(1, 500, 23, 1)
-    print(test_protein.shape)
+    #print(test_protein.shape)
     preds = new_model.predict(test_protein) #Take a single protein to test and reshape it
     label_index = np.argmax(preds, axis=2)
     labels = [1, 0, 0, 0, 1, 0, 0, 0, 1]
@@ -141,21 +141,14 @@ def testing_protein(numpyfile, act_len): #Make predictions
     return(results)
 
 userformat_to_numpytextformat('./text_format_sample_1.txt')
-
 fp=open('./text_format_sample_1.txt','r')
-
 lenf=len(fp.readlines())
-
-print(lenf)
-
+#print(lenf)
 x3=gettext('./numpytext_format_sys.txt')
-
 np.save('./bench_sample_2_sys.npy', x3)  #saving in numpy format
-
 res=testing_protein('./bench_sample_2_sys.npy',lenf)
 print("\n")
 print("The assignments for the given file are:")
-
 print(' '.join(res))
 #end = time.time()
 #print({end-start})
